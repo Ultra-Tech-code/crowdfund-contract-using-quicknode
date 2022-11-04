@@ -3,8 +3,6 @@ require("@nomiclabs/hardhat-etherscan");
 import "@nomiclabs/hardhat-ethers";
 require("dotenv").config({ path: ".env" });
 
-const INFURA_MAINNET_API_URL = process.env.INFURA_MAINNET_API_KEY_URL;
-
 module.exports = {
   solidity: "0.8.17",
   networks: {

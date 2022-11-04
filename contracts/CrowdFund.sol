@@ -33,16 +33,19 @@ contract Crowdfund {
         uint invested;
     }
     
-    // the key is the project / projectslength
-    // use Project.suggestions as length for mapping
+    //mapping to keep track of if an address has donate/support a project
     mapping(uint => mapping(address => bool)) internal isSupporting;
-    mapping(uint => mapping(address => uint)) internal investAmount;
-    mapping(uint => address[]) internal supporters; // key is project index
-    
-    
 
+    //mapping to keep track of amount donated by an address to a project
+    mapping(uint => mapping(address => uint)) internal investAmount;
+
+    //mapping to keep track of each address that has donated
+    mapping(uint => address[]) internal supporters; 
+    
+    //mapping to keep track of each project created
     mapping (uint => Project) internal projects;
 
+    //function to create a project
     function addProject(
         string memory _name,
         string memory _description,
@@ -60,6 +63,7 @@ contract Crowdfund {
         projectslength ++;
     }
 
+    //function to get the content of a project
     function readProject(uint _index) public view returns (
         address _creator,
         string memory _name,
@@ -78,6 +82,7 @@ contract Crowdfund {
         );
     }
     
+    //function to donate/support a particular project
     function supportProject(uint _index, uint _amount) public {
         require(
           IERC20Token(contractToken).transferFrom(
@@ -97,14 +102,17 @@ contract Crowdfund {
         
     }
     
+    // Function to get the total number of people that have supported a particular project
     function getSupporters(uint _index) public view returns(address[] memory _supporters) {
         return supporters[_index];
     }
     
+    //function to get the amount donated by a particular address to a particular project
     function amountSupported(uint _index, address _addr) public view returns(uint _amount) {
         return investAmount[_index][_addr];
     }
     
+    //function to get the total project that has been created
     function totalProjects() public view returns (uint) {
         return (projectslength);
     }

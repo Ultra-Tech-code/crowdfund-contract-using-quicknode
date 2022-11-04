@@ -12,8 +12,6 @@ async function main() {
 }
 
 //CrowdFundContractAddress = 0xb129c2Aa7908Cbb431DFDaeB01F2F1F324bE8a42
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

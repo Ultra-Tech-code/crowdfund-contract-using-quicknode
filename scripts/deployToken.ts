@@ -8,7 +8,7 @@ async function main() {
   await crowdFundCoin.deployed();
   console.log(`crowdFundCoin deployed to ${crowdFundCoin.address}`);
 
-  //interact with it
+  //Mint some Token 
   const CrowdFundContract = await ethers.getContractAt("CrowdFundCoin", crowdFundCoin.address);
   const amt = ethers.utils.parseUnits("100");
   const mint = await  CrowdFundContract.transferOut(Deployeraddress, amt)
@@ -17,8 +17,6 @@ async function main() {
 }
 
 //crowdFundCoinAddress = 0x49620E238a6eA0e76632073355662f2d0E6986Bc
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
